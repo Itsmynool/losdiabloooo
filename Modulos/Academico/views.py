@@ -601,3 +601,17 @@ def modificar_preguntas(request, pregunta_id):
 			data["mensaje"]="El archivo no existe"
 			return redirect(to='Listapreguntas')
 	return render(request, 'modificarPregunta.html', data)
+
+from django.db.models import Q
+
+def puntuaciones(request):
+    puntuaciones = Puntuacion.objects.all()
+    query = request.GET.get('q')
+    if query:
+        puntuaciones = puntuaciones.filter(estudiante__first_name__icontains=query) | \
+                       puntuaciones.filter(estudiante__last_name__icontains=query) | \
+                       puntuaciones.filter(estudiante__username__icontains=query) | \
+                       puntuaciones.filter(tipo_de_juego__icontains=query)
+        
+    return render(request, "listaPuntuaciones.html", {"Puntuaciones": puntuaciones})
+

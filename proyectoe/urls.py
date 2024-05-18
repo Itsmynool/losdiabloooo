@@ -5,14 +5,10 @@ from Modulos.Academico.views import Listaestudiante, buscarestudiante, agregar_e
 from Modulos.Academico.views import modificar_curso, eliminar_curso, Listacurso, eliminar_preguntas, Listaadivinanzas
 from Modulos.Academico.views import modificar_docente, eliminar_docente, Listadocente, logout_view, modificar_preguntas, eliminar_adivinanzas
 from Modulos.Academico.views import modificar_calificaciones, eliminar_calificaciones, Listacalificaciones, buscarCalificacion
-from Modulos.Academico.views import Listapreguntas, logout, juegoPregunta, procesar_respuestas_preguntas, agregar_adivinanza, modificar_adivinanzas
+from Modulos.Academico.views import Listapreguntas, puntuaciones, juegoPregunta, procesar_respuestas_preguntas, agregar_adivinanza, modificar_adivinanzas
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('login/', login_view, name='login'),
-    path('logout/', logout_view, name='logout'),
-    path('login_viewEstudiante/', login_viewEstudiante, name='login_viewEstudiante'),
     path('procesar_respuestas/', procesar_respuestas, name='procesar_respuestas'),
     path('agregar_estudiantes/', agregar_estudiantes, name='agregar_estudiantes'),   
     path('agregar_curso/', agregar_curso, name='agregar_curso'), 
@@ -58,4 +54,12 @@ urlpatterns = [
     path('index/', index, name='index'),
     path('', index_two, name='index_two'),
 
+    # Otros
+    path('admin/', admin.site.urls),
+    path('login/', login_view, name='login'),
+    path('logout/', logout_view, name='logout'),
+    path('login_viewEstudiante/', login_viewEstudiante, name='login_viewEstudiante'),
+
+    # Puntuaciones
+    path('puntuaciones/', puntuaciones, name='puntuaciones'),
 ]

@@ -60,20 +60,18 @@
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>Cod Docente</th>
+								<th>Documento</th>
 								<th>Nombre Completo</th>
                 <th>Correo</th>
-                <th>Clave</th>
                 <th>Documento</th>
 						</thead>
 						<tbody>
 							{% for c in Docente %}
 							<tr>
 								<td>{{forloop.counter}}</td>
-								<td>{{c.codDocente}}</td>
-								<td>{{c.nombreCompleto}}</td>
+								<td>{{c.documento}}</td>
+								<td>{{c.nombre_completo}}</td>
                 <td>{{c.correo}}</td>
-                <td>{{c.clave}}</td>
                 <td>{{c.documento}}</td>
                 <td>
                     <a href="{% url 'modificar_docente' c.documento %}" class="btn btn-info btn-sm">MODIFICAR</a>

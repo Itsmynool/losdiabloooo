@@ -38,11 +38,10 @@
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>Nombres</th>
-								<th>Primer apellido</th>
-                <th>Segundo apellido</th>
+								<th>Nombre</th>
+								<th>Apellido</th>
+                <th>Curso</th>
                 <th>Documento</th>
-                <th>Fecha Nacimiento</th>
                 <th>Genero</th>
 							</tr>
 						</thead>
@@ -50,11 +49,10 @@
 							{% for c in Estudiantes %}
 							<tr>
 								<td>{{forloop.counter}}</td>
-								<td>{{c.nombres}}</td>
-								<td>{{c.primerApellido}}</td>
-                <td>{{c.segundoApellido}}</td>
+								<td>{{c.first_name}}</td>
+								<td>{{c.last_name}}</td>
+                <td>{{c.curso}}</td>
 								<td>{{c.documento}}</td>
-								<td>{{c.fechaNacimiento}}</td>
 								<td>{{c.genero}}</td>
 
                 <td>

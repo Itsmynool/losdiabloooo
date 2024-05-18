@@ -17,22 +17,22 @@ from django.contrib.auth.models import Group, Permission
 from django.db import models
 
 class DocenteManager(BaseUserManager):
-    def create_user(self, correo, contraseña=None, **extra_fields):
+    def create_user(self, correo, **extra_fields):
         if not correo:
             raise ValueError('El correo electrónico es obligatorio para crear un usuario.')
         user = self.model(correo=self.normalize_email(correo), **extra_fields)
-        user.set_password(contraseña)
+        user.set_password('12345')  # Contraseña predeterminada
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, correo, contraseña=None, **extra_fields):
+    def create_superuser(self, correo, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
         if extra_fields.get('is_staff') is not True:
             raise ValueError('Superuser debe tener is_staff=True.')
         if extra_fields.get('is_superuser') is not True:
             raise ValueError('Superuser debe tener is_superuser=True.')
-        return self.create_user(correo, contraseña, **extra_fields)
+        return self.create_user(correo, **extra_fields)
 
 class Docente(AbstractBaseUser, PermissionsMixin):
     nombre_completo = models.CharField(max_length=255)

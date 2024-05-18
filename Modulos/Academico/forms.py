@@ -17,16 +17,15 @@ class CursoForm(forms.ModelForm):
 		fields = '__all__'
 
 class DocenteForm(forms.ModelForm):
-
-	class Meta:
-		model = Docente
-		fields = '__all__'
+    class Meta:
+        model = Docente
+        fields = ['nombre_completo', 'correo', 'documento']
 
 class EstudiantesForm(forms.ModelForm):
 
 	class Meta:
 		model = Estudiante
-		fields = '__all__'
+		fields = ['first_name', 'last_name', 'username', 'email', 'fecha_nacimiento', 'genero', 'curso']
 
 class CalificacionesForm(forms.ModelForm):
 

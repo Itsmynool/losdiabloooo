@@ -11,7 +11,7 @@ from .models import Docente
 from .models import Curso
 from .models import Calificacion
 from .models import Preguntas
-from .models import Adivinanzas
+from .models import Adivinanzas, Puntuacion
 from .forms import EstudiantesForm
 from .forms import CursoForm
 from .forms import DocenteForm
@@ -132,11 +132,15 @@ def login_viewEstudiante(request):
     return render(request, 'loginEstudiante.html', {'form': form})
 
 def juegoAdivinanza(request):
+    puntuacionObj = ''
+    print(request.user)
     if request.method == 'POST':
         total_adivinanzas = Adivinanzas.objects.count()
         return render(request, 'juegoAdivinanza.html', {'adivinanzas': None, 'total_adivinanzas': total_adivinanzas})
 
     if 'reiniciar' in request.GET:
+        puntuacionObj = Puntuacion(estudiante=request.user, puntuacion=request.session.get('puntaje', 0), tipo_de_juego='Adivinanza' )
+        puntuacionObj.save()
         request.session.pop('adivinanzas_mostradas', None)
         request.session.pop('puntaje', None)
         return redirect('juego_adivinanza')
@@ -145,7 +149,8 @@ def juegoAdivinanza(request):
     todas_las_adivinanzas = list(Adivinanzas.objects.all())
     adivinanzas_restantes = [adivinanza for adivinanza in todas_las_adivinanzas if adivinanza.id not in adivinanzas_mostradas]
 
-    print("TODAS: ", todas_las_adivinanzas)
+    print("TODAS: ", len(todas_las_adivinanzas))
+    print("RESTANTES: ", len(adivinanzas_mostradas))
 
     if adivinanzas_restantes:
         adivinanza = choice(adivinanzas_restantes)
@@ -157,6 +162,8 @@ def juegoAdivinanza(request):
 
     total_adivinanzas = Adivinanzas.objects.count()
     puntaje = request.session.get('puntaje', 0)
+    #puntuacionObj = Puntuacion(estudiante=request.user, puntuacion=puntaje, tipo_de_juego='Adivinanza' )
+    #puntuacionObj.save()
     return render(request, 'juegoAdivinanza.html', {'adivinanzas': None, 'puntaje': puntaje, 'total_adivinanzas': total_adivinanzas})
 
 def procesar_respuestas(request):
@@ -178,11 +185,14 @@ def procesar_respuestas(request):
 
 
 def juegoPregunta(request):
+    puntuacionObj=''
     if request.method == 'POST':
         total_preguntas = Preguntas.objects.count()
         return render(request, 'juegoPregunta.html', {'preguntas': None, 'total_preguntas': total_preguntas})
 
     if 'reiniciar' in request.GET:
+        puntuacionObj = Puntuacion(estudiante=request.user, puntuacion=request.session.get('puntaje', 0), tipo_de_juego='Preguntas' )
+        puntuacionObj.save()
         request.session.pop('preguntas_mostradas', None)
         request.session.pop('puntaje', None)
         return redirect('juego_pregunta')
@@ -278,6 +288,35 @@ def agregar_adivinanza(request):
 			data["mensaje"]="el archivo ya existe"
 	return render(request, 'agregarpregunta.html', data)
 
+def Listaadivinanzas(request):
+	Listaadivinanzas=Adivinanzas.objects.all()
+	return render(request, "listaadivinanzas.html",{"Adivinanzas":Listaadivinanzas})
+
+def eliminar_adivinanzas(request, adivinanza_id):
+    adivinanza = get_object_or_404(Adivinanzas, id=adivinanza_id)
+    adivinanza.delete()
+    messages.success(request, "Adivinanza eliminada correctamente")
+    return redirect(to='Listaadivinanzas')
+
+def modificar_adivinanzas(request, adivinanza_id):
+	adivinanza=get_object_or_404(Adivinanzas, id=adivinanza_id)#busca un elemento
+	data={
+		'form':AdivinanzasForm(instance=adivinanza)
+	}
+
+	if request.method=='POST':
+		formulario=AdivinanzasForm(data=request.POST, instance=adivinanza, files=request.FILES)
+		if formulario.is_valid():
+			formulario.save()
+			messages.success(request, "Modificado Correctamente")
+			data["mensaje"]="Archivo Modificado"
+			return redirect(to='../ladivinanzas')
+		else:
+			data["form"]=formulario
+			data["mensaje"]="El archivo no existe"
+			return redirect(to='Listaadivinanzas')
+	return render(request, 'modificarAdivinanza.html', data)
+
 def calificaciones(request):
 	data={
 		'form': CalificacionesForm()
@@ -293,7 +332,7 @@ def calificaciones(request):
 			data["mensaje"]="el archivo ya existe"
 	return render(request, 'calificaciones.html', data)
 
-@login_required
+@login_required(login_url='/login/')  
 def index(request):
     return render(request, "index.html",{})     
 
@@ -430,6 +469,18 @@ def eliminar_docente(request, documento):
 	messages.success(request, "Eliminado Correctamente")
 	return redirect(to='Listadocente')
 
+def buscarCalificacion(request):
+	busqueda=request.GET.get("buscar")
+	calificaciones=Calificacion.objects.all()
+	if busqueda:
+		calificaciones = Calificacion.objects.filter(
+			Q(codCalificacion__icontains = busqueda) | #or (o)
+			Q(actividad__icontains = busqueda) |
+			Q(codEstudiante__nombres__icontains = busqueda) |
+			Q(calificacion__icontains = busqueda) 
+			).distinct()
+
+	return render(request, "listacalificaciones.html", {"Calificaciones":calificaciones})
 
 def modificar_calificaciones(request, codCalificacion):
 	calificaciones=get_object_or_404(Calificacion, codCalificacion=codCalificacion)#busca un elemento
@@ -525,3 +576,28 @@ def index_two(request):
 
 def juegosplan(request):
     return render(request, "startbootstrap-personal-gh-pages/projects.html",{})    
+
+def eliminar_preguntas(request, pregunta_id):
+    pregunta = get_object_or_404(Preguntas, id=pregunta_id)
+    pregunta.delete()
+    messages.success(request, "Pregunta eliminada correctamente")
+    return redirect(to='Listapreguntas')
+
+def modificar_preguntas(request, pregunta_id):
+	pregunta=get_object_or_404(Preguntas, id=pregunta_id)#busca un elemento
+	data={
+		'form':PreguntasForm(instance=pregunta)
+	}
+
+	if request.method=='POST':
+		formulario=PreguntasForm(data=request.POST, instance=pregunta, files=request.FILES)
+		if formulario.is_valid():
+			formulario.save()
+			messages.success(request, "Modificado Correctamente")
+			data["mensaje"]="Archivo Modificado"
+			return redirect(to='../lpreguntas')
+		else:
+			data["form"]=formulario
+			data["mensaje"]="El archivo no existe"
+			return redirect(to='Listapreguntas')
+	return render(request, 'modificarPregunta.html', data)

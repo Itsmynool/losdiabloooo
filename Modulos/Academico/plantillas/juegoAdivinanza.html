@@ -22,30 +22,30 @@
         text-align: center;
         color: #333;
     }
-    .question {
-        margin-bottom: 20px;
-        text-align: center; 
-    }
+    
     .question p {
-        font-size: 18px;
+        font-size: 30px;
         margin-bottom: 10px;
     }
     .question input[type="submit"] {
         margin-right: 10px;
         padding: 10px 20px;
-        font-size: 16px;
+        font-size: 20px;
         background-color: #a45fff;
         color: #fff;
         border: none;
         border-radius: 4px;
         cursor: pointer;
     }
-    .question input[type="submit"]:hover {
-        background-color: #8a3ff9;
-    }
-    .check, .cross {
+    #texto-puntaje {
         font-size: 24px;
-        vertical-align: middle;
+        color: #666; 
+        margin-bottom: 20px; 
+    }
+    #puntaje {
+        font-size: 24px;
+        color: #333; 
+        font-weight: bold;
     }
 
 </style>
@@ -65,9 +65,9 @@
             </div>
         </form>
     {% else %}
-        <p class="text-center">Tu puntaje final es: <span id="puntaje">{{ puntaje }}/{{ total_adivinanzas }}</span></p>
+    <p id="texto-puntaje">Tu puntaje final es: <span id="puntaje">{{ puntaje }}/{{ total_adivinanzas }}</span></p>
         <form action="{% url 'juego_adivinanza' %}" method="get">
-            <input type="submit" name="reiniciar" value="Intentar de nuevo">
+            <input type="submit" name="reiniciar" value="Intentar de nuevo" class="btn" style="background-color: #a45fff; color: #fff;">
         </form>
     {% endif %}
 </div>

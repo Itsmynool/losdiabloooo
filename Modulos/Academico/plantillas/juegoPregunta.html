@@ -1,4 +1,6 @@
-{% extends 'startbootstrap-sb-admin-2-gh-pages/buttons.html' %} {% load static %} {% block contenido %}
+{% extends 'startbootstrap-sb-admin-2-gh-pages/buttons.html' %} 
+{% load static %} 
+{% block contenido %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -16,8 +18,13 @@
             margin: 0 auto;
         }
         .form-check-label {
-            font-family: 'Lato', sans-serif;
+            font-family: 'Prompt';
+            font-size: 30px;
+            font-weight: bold;
+            color: #333; 
+            margin-left: 20px;
         }
+
     </style>
 </head>
 <body>
@@ -32,8 +39,8 @@
                             <p style="color: rgb(0, 0, 0); margin-top: 20px; font-size: 24px; font-family: 'Montserrat', sans-serif; font-weight: bold;">{{ preguntas.enunciado }}</p>
                             {% for opcion in preguntas.opciones %}
                             <div class="form-check">
-                                <input class="form-check-input" type="submit" name="respuesta{{ preguntas.id }}" id="flexRadioDefault{{ forloop.counter }}" value="{{ opcion }}" style="padding: 10px;">
-                                <label class="form-check-label" for="flexRadioDefault{{ forloop.counter }}" style="font-size: 18px; margin-left: 10px;">{{ opcion }}</label>
+                                <input class="form-check-input" type="submit" name="respuesta{{ preguntas.id }}" id="flexRadioDefault{{ forloop.counter }}" value="{{ opcion }}">
+                                <label class="form-check-label" for="flexRadioDefault{{ forloop.counter }}">{{ opcion }}</label>
                             </div>
                             {% endfor %}
                         </div>
@@ -47,7 +54,7 @@
                         <p style="color: rgb(0, 0, 0); margin-top: 20px; font-size: 24px; font-family: 'Montserrat', sans-serif; font-weight: bold;">Tu puntaje final es: <span id="puntaje">{{ puntaje }}/{{ total_preguntas }}</span></p>
                         <form action="{% url 'juego_pregunta' %}" method="get">
                             <div class="form-check" style="margin-top: 100px;">
-                                <input type="submit" name="reiniciar" value="Intentar de nuevo" class="btn btn-primary">
+                                <input type="submit" name="reiniciar" value="Intentar de nuevo" class="btn" style="background-color: #a45fff; color: #fff;">
                             </div>
                         </form>
                     </div>

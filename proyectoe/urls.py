@@ -5,7 +5,7 @@ from Modulos.Academico.views import Listaestudiante, buscarestudiante, agregar_e
 from Modulos.Academico.views import modificar_curso, eliminar_curso, Listacurso, eliminar_preguntas, Listaadivinanzas, listaMemoria, eliminar_memorias
 from Modulos.Academico.views import modificar_docente, eliminar_docente, Listadocente, logout_view, modificar_preguntas, eliminar_adivinanzas
 from Modulos.Academico.views import modificar_calificaciones, eliminar_calificaciones, Listacalificaciones, buscarCalificacion, modificar_memorias
-from Modulos.Academico.views import Listapreguntas, puntuaciones, juegoPregunta, procesar_respuestas_preguntas, agregar_adivinanza, modificar_adivinanzas
+from Modulos.Academico.views import juegoMemoria, Listapreguntas, puntuaciones, juegoPregunta, procesar_respuestas_preguntas, agregar_adivinanza, modificar_adivinanzas
 
 
 urlpatterns = [
@@ -56,6 +56,7 @@ urlpatterns = [
     path('modificar_adivinanzas/<int:adivinanza_id>', modificar_adivinanzas, name="modificar_adivinanzas"),
 
     # Memoria
+    path('juego_memoria/', juegoMemoria, name='juegoMemoria'),
     path('lmemoria/', listaMemoria, name='ListaMemoria'),
     path('modificar_memoria/<int:memoria_id>', modificar_memorias, name="modificar_memorias"),
     path('eliminar_memoria/<int:memoria_id>', eliminar_memorias, name="eliminar_memorias"),

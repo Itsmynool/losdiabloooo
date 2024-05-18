@@ -644,3 +644,21 @@ def eliminar_memorias(request, memoria_id):
     messages.success(request, "Memoria eliminada correctamente")
     return redirect(to='ListaMemoria')
 
+def juegoMemoria(request):
+    # Selecciona 5 calificaciones aleatorias
+    memoria = list(Memoria.objects.all())
+    seleccionadas = random.sample(memoria, 5)
+    
+    # Crea una lista de pares (nombre, enlace, descubierta)
+    pares = []
+    for c in seleccionadas:
+        pares.append((c.nombre, c.enlace_1, False))
+        pares.append((c.nombre, c.enlace_2, False))
+    
+    # Mezcla los pares para el juego
+    random.shuffle(pares)
+    
+    # Crear una matriz 2x5 (10 espacios) con los pares
+    matriz = [pares[i:i + 5] for i in range(0, len(pares), 5)]
+
+    return render(request, 'juego_memoria.html', {'matriz': matriz})

@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Juego de Memoria</title>
-<style>
+    <style>
         .memory-game {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -53,10 +53,10 @@
     <div class="memory-game">
         {% for row in matriz %}
             {% for name, image, descubierta in row %}
-            <div class="memory-card" data-name="{{ name }}" data-descubierta="{{ descubierta }}">
+            <div class="memory-card {% if descubierta %}flip{% endif %}" data-name="{{ name }}" data-descubierta="{{ descubierta }}">
                 <div class="memory-card-inner">
-                    <img src="{{ image }}" alt="Imagen de {{ name }}" class="memory-card-front">
-                    <img src="{% static 'img/negro.jpg' %}" alt="Reverso" class="memory-card-back">
+                    <img src="{% static 'img/negro.jpg' %}" alt="Imagen de reverso" class="memory-card-front">
+                    <img src="{{ image }}" alt="Imagen de {{ name }}" class="memory-card-back">
                 </div>
             </div>
             {% endfor %}
@@ -69,23 +69,29 @@
             let hasFlippedCard = false;
             let lockBoard = false;
             let firstCard, secondCard;
-    
+            let initialFlip = false; // Variable que indica si las cartas se han volteado inicialmente
+
             function flipCard() {
                 if (lockBoard) return;
-                if (this === firstCard) return;
-    
+                if (this === firstCard) {
+                    this.classList.remove('flip');
+                    hasFlippedCard = false;
+                    firstCard = null;
+                    return;
+                }
+
                 this.classList.add('flip');
-    
+
                 if (!hasFlippedCard) {
                     hasFlippedCard = true;
                     firstCard = this;
                     return;
                 }
-    
+
                 secondCard = this;
                 checkForMatch();
             }
-    
+
             function checkForMatch() {
                 if (firstCard.dataset.name === secondCard.dataset.name) {
                     disableCards();
@@ -96,42 +102,71 @@
                     }, 1500);
                 }
             }
-    
+
             function disableCards() {
                 firstCard.dataset.descubierta = 'true';
                 secondCard.dataset.descubierta = 'true';
                 resetBoard();
             }
-    
+
             function unflipCards() {
                 firstCard.classList.remove('flip');
                 secondCard.classList.remove('flip');
                 resetBoard();
             }
-    
+
             function resetBoard() {
                 [hasFlippedCard, lockBoard] = [false, false];
                 [firstCard, secondCard] = [null, null];
-            }
-    
-            cards.forEach(card => card.addEventListener('click', flipCard));
-    
-            // Tapar las imágenes nuevamente después de 3 segundos
-            setTimeout(() => {
+
+                // Verificar si todas las cartas están descubiertas después de cada intento
+                let allDiscovered = true;
                 cards.forEach(card => {
-                    if (card.dataset.descubierta === 'false') {
-                        card.classList.remove('flip');
+                    if (card.dataset.descubierta !== 'true') {
+                        allDiscovered = false;
                     }
                 });
-            }, 3000);
+
+                // Si todas las cartas están descubiertas, voltearlas nuevamente después de 3 segundos
+                if (allDiscovered) {
+                    setTimeout(() => {
+                        flipDiscoveredCardsBack();
+                    }, 3000);
+                }
+            }
+
+            // Función para voltear las imágenes descubiertas nuevamente después de 3 segundos
+            function flipDiscoveredCardsBack() {
+                const cards = document.querySelectorAll('.memory-card');
+                cards.forEach(card => {
+                    if (card.dataset.descubierta === 'true') {
+                        card.classList.remove('flip');
+                        card.dataset.descubierta = 'false';
+                    }
+                });
+            }
+
+            // Voltear todas las cartas inicialmente si initialFlip es false
+            if (!initialFlip) {
+                cards.forEach(card => {
+                    card.classList.add('flip');
+                    card.dataset.descubierta = 'true';
+                });
+
+                // Después de 3 segundos, volver a voltear las cartas
+                setTimeout(() => {
+                    cards.forEach(card => {
+                        card.classList.remove('flip');
+                        card.dataset.descubierta = 'false';
+                    });
+                    initialFlip = true;
+                }, 3000);
+            }
+
+            cards.forEach(card => card.addEventListener('click', flipCard));
         });
     </script>
-     
-    
-
 </body>
 </html>
-
-
 
 {% endblock %}

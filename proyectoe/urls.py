@@ -9,23 +9,28 @@ from Modulos.Academico.views import Listapreguntas, puntuaciones, juegoPregunta,
 
 
 urlpatterns = [
-    path('procesar_respuestas/', procesar_respuestas, name='procesar_respuestas'),
-    path('agregar_estudiantes/', agregar_estudiantes, name='agregar_estudiantes'),   
-    path('agregar_curso/', agregar_curso, name='agregar_curso'), 
-    path('agregar_docente/', agregar_docente, name='agregar_docente'), 
+    # Estudiante
+    path('agregar_estudiantes/', agregar_estudiantes, name='agregar_estudiantes'),
     path('lestudiantes/', Listaestudiante, name='Listaestudiante'),
     path('buscarestudiante/', buscarestudiante),
     path('modificar_estudiante/<int:documento>', modificar_estudiante, name="modificar_estudiante"),
     path('eliminar_estudiante/<int:documento>', eliminar_estudiante, name="eliminar_estudiante"),
-    path('lcurso/', Listacurso, name='Listacurso'),
-    path('modificar_curso/<int:codCurso>', modificar_curso, name="modificar_curso"),
-    path('eliminar_curso/<int:codCurso>', eliminar_curso, name="eliminar_curso"),
+
+    # Docente
+    path('agregar_docente/', agregar_docente, name='agregar_docente'), 
     path('ldocente/', Listadocente, name='Listadocente'),
     path('modificar_docente/<int:documento>', modificar_docente, name="modificar_docente"),
     path('eliminar_docente/<int:documento>', eliminar_docente, name="eliminar_docente"),
+
+    # Curso
+    path('agregar_curso/', agregar_curso, name='agregar_curso'), 
+    path('lcurso/', Listacurso, name='Listacurso'),
+    path('eliminar_curso/<int:codCurso>', eliminar_curso, name="eliminar_curso"),
+    path('modificar_curso/<int:codCurso>', modificar_curso, name="modificar_curso"),
+
+    path('procesar_respuestas/', procesar_respuestas, name='procesar_respuestas'),
     path("juegoU", juegoU, name='juegoU'),
     path('juegosplan/', juegosplan, name='juegosplan' ),
-    path("logout/", logout_view, name='logout_view'),
 
     # Preguntas
     path('juego_pregunta/', juegoPregunta, name='juego_pregunta'),

@@ -1,0 +1,74 @@
+{% extends 'startbootstrap-sb-admin-2-gh-pages/buttons.html' %}
+{% load static %}
+
+{% block contenido %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center; 
+    }
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+    .question {
+        margin-bottom: 20px;
+        text-align: center; 
+    }
+    .question p {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+    .question input[type="submit"] {
+        margin-right: 10px;
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #a45fff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .question input[type="submit"]:hover {
+        background-color: #8a3ff9;
+    }
+    .check, .cross {
+        font-size: 24px;
+        vertical-align: middle;
+    }
+
+</style>
+
+<div class="container">
+    <h1>Juego de Adivinanzas</h1>
+    {% if adivinanzas %}
+        <form method="post" action="{% url 'procesar_respuestas' %}" class="question-form">
+            {% csrf_token %}
+            <div class="question">
+                <p>{{ adivinanzas.enunciado }}</p>
+               
+                {% for opcion in adivinanzas.opciones %}
+                    <input type="submit" name="respuesta{{ adivinanzas.id }}" value="{{ opcion }}"
+                        {% if adivinanzas.respuesta_seleccionada == opcion %}class="selected"{% endif %}>
+                {% endfor %}
+            </div>
+        </form>
+    {% else %}
+        <p class="text-center">Tu puntaje final es: <span id="puntaje">{{ puntaje }}/{{ total_adivinanzas }}</span></p>
+        <form action="{% url 'juego_adivinanza' %}" method="get">
+            <input type="submit" name="reiniciar" value="Intentar de nuevo">
+        </form>
+    {% endif %}
+</div>
+{% endblock %}

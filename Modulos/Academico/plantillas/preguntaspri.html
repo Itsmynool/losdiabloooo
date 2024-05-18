@@ -1,0 +1,21 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preguntas</title>
+</head>
+<body>
+    <h1>Trivia Game</h1>
+    <form action="{% url 'answer_question' question.id %}" method="post">
+        {% csrf_token %}
+        {% for question in questions %}
+            <h3>{{ question.text }}</h3>
+            {% for answer in question.answer_set.all %}
+                <input type="radio" name="answer" value="{{ answer.id }}"> {{ answer.text }}<br>
+            {% endfor %}
+        {% endfor %}
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

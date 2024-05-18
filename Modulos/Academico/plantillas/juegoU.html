@@ -1,0 +1,399 @@
+{% extends 'startbootstrap-sb-admin-2-gh-pages/buttons.html' %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+{% block contenido %}
+<center>
+    <nav class="navbar navbar-expand-lg " style="width: 400px; height: 80px;">
+        <!--<div class="container-fluid">-->
+        <form class="d-flex" method="GET">
+            <div class="input-group">
+                <input type="text" class="form-control me-2" placeholder="Buscar" name="buscar"
+                    value="{{ request.curso.GET.buscar }}" aria-label="Search">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-success" type="submit">Buscar</button>
+                </div>
+            </div>
+        </form>
+    </nav>
+</center>
+<div class="container py-4">
+
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <div id="carouselExampleIndicators" class="carousel slide" style="background-color: #A890FE; z-index: 0;">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
+                    aria-label="Slide 4"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4"
+                    aria-label="Slide 5"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="5" class="active"
+                    aria-current="true" aria-label="Slide 6"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="6"
+                    aria-label="Slide 7"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="7"
+                    aria-label="Slide 8"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="8"
+                    aria-label="Slide 9"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="9"
+                    aria-label="Slide 10"></button>
+
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <p style="color: white;">Pregunta1</p>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"
+                            value="true">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            Respuesta 1
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"
+                            value="false">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Respuesta 2
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"
+                            value="false">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Respuesta 3
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"
+                            value="false">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Respuesta 4
+                        </label>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <p style="color: white;">Pregunta2</p>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault2" id="flexRadioDefault3"
+                            value="true">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            Respuesta 1
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault2" id="flexRadioDefault3"
+                            value="false">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Respuesta 2
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault2" id="flexRadioDefault3"
+                            value="false">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Respuesta 3
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault2" id="flexRadioDefault3"
+                            value="false">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Respuesta 4
+                        </label>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <p style="color: white;">Pregunta3</p>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault3" id="flexRadioDefault4"
+                            value="true">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            Respuesta 1
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault3" id="flexRadioDefault4"
+                            value="false">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Respuesta 2
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault3" id="flexRadioDefault4"
+                            value="false">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Respuesta 3
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault3" id="flexRadioDefault4"
+                            value="false">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Respuesta 4
+                        </label>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <p style="color: white;">Pregunta4</p>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault4" id="flexRadioDefault5"
+                            value="true">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            Respuesta 1
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault4" id="flexRadioDefault5"
+                            value="false">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Respuesta 2
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault4" id="flexRadioDefault5"
+                            value="false">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Respuesta 3
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault4" id="flexRadioDefault5"
+                            value="false">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Respuesta 4
+                        </label>
+                    </div>
+
+                </div>
+                <div class="carousel-item">
+                    <p style="color: white;">Pregunta5</p>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault5" id="flexRadioDefault6"
+                            value="true">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            Respuesta 1
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault5" id="flexRadioDefault6"
+                            value="false">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Respuesta 2
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault5" id="flexRadioDefault6"
+                            value="false">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Respuesta 3
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault5" id="flexRadioDefault6"
+                            value="false">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Respuesta 4
+                        </label>
+                    </div>
+
+                </div>
+                <div class="carousel-item">
+                    <p style="color: white;">Pregunta6</p>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault6" id="flexRadioDefault7"
+                            value="true">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            Respuesta 1
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault6" id="flexRadioDefault7"
+                            value="false">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Respuesta 2
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault6" id="flexRadioDefault7"
+                            value="false">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Respuesta 3
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault6" id="flexRadioDefault7"
+                            value="false">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Respuesta 4
+                        </label>
+                    </div>
+
+                </div>
+                <div class="carousel-item">
+                    <p style="color: white;">Pregunta7</p>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault7" id="flexRadioDefault8"
+                            value="true">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            Respuesta 1
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault7" id="flexRadioDefault8"
+                            value="false">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Respuesta 2
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault7" id="flexRadioDefault8"
+                            value="false">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Respuesta 3
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault7" id="flexRadioDefault8"
+                            value="false">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Respuesta 4
+                        </label>
+                    </div>
+
+                </div>
+                <div class="carousel-item">
+                    <p style="color: white;">Pregunta8</p>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault8" id="flexRadioDefault9"
+                            value="true">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            Respuesta 1
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault8" id="flexRadioDefault9"
+                            value="false">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Respuesta 2
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault8" id="flexRadioDefault9"
+                            value="false">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Respuesta 3
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault8" id="flexRadioDefault9"
+                            value="false">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Respuesta 4
+                        </label>
+                    </div>
+
+                </div>
+                <div class="carousel-item">
+                    <p style="color: white;">Pregunta9</p>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault9" id="flexRadioDefault10"
+                            value="true">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            Respuesta 1
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault9" id="flexRadioDefault10"
+                            value="false">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Respuesta 2
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault9" id="flexRadioDefault10"
+                            value="false">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Respuesta 3
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault9" id="flexRadioDefault10"
+                            value="false">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Respuesta 4
+                        </label>
+                    </div>
+
+                </div>
+                <div class="carousel-item">
+                    <p style="color: white;">Pregunta10</p>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault10" id="flexRadioDefault11"
+                            value="true">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            Respuesta 1
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault10" id="flexRadioDefault11"
+                            value="false">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Respuesta 2
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault10" id="flexRadioDefault11"
+                            value="false">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Respuesta 3
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault10" id="flexRadioDefault11"
+                            value="false">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Respuesta 4
+                        </label>
+                    </div>
+                    <div style="padding-top: 30px;">
+                        <center>
+                            <button class="btn btn-success justify-content-center">Enviar</button>
+                        </center>
+                    </div>
+                </div>
+
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev" style="color: black;">
+                <span class="carousel-control-prev-icon" aria-hidden="true" style="color: black;"></span>
+                <span class="visually-hidden bg-dark" style="color: black;">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </form>
+</div>
+</div>
+</center>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
+    integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"
+    integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj"
+    crossorigin="anonymous"></script>
+{% endblock %}
+</body>
+
+</html>

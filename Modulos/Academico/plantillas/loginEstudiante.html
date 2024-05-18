@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f7f7f7;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .login-container {
+        background-image: url("{% static 'img/loginfondo.png' %}");
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-size: cover;
+        /* Ajusta la imagen para que cubra toda la página */
+        background-position: center;
+        /* Centra la imagen */
+        background-repeat: no-repeat;
+        overflow-y: hidden;
+    }
+
+    .login-box {
+        background-color: #ffffff;
+        border-radius: 10px;
+        padding: 100px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 400px;
+        height: 400px;
+    }
+
+    h2 {
+        margin-top: 0;
+        margin-bottom: 40px;
+        text-align: center;
+        color: #333;
+        font-size: 35px;
+    }
+
+    .textbox {
+        position: relative;
+        margin-bottom: 30px;
+    }
+
+    .textbox input {
+        width: 100%;
+        padding: 20px;
+        background-color: #f7f7f7;
+        border: none;
+        border-bottom: 2px solid #ddd;
+        font-size: 16px;
+        color: #333;
+    }
+
+    .textbox input:focus {
+        outline: none;
+    }
+
+    .textbox input:focus~span:before {
+        width: 100%;
+    }
+
+    .textbox span {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: #4a7ff5;
+        transition: 0.4s;
+    }
+
+    .btn {
+        width: 110%;
+        padding: 10px;
+        background-color: #462cdc;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        font-size: 20px;
+    }
+
+    .btn:hover {
+        background-color: #d62088;
+    }
+
+    .nice-button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #7927bd;
+        color: #ffffff;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        margin-top: 20px;
+        /* Ajusta el espacio superior según sea necesario */
+    }
+
+    .nice-button:hover {
+        background-color: #d62088;
+        text-decoration: none;
+    }
+</style>
+<title>{% block title %}Login{% endblock %}</title>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <h2>INICIAR SESION</h2>
+            <form method="post" class="login-form">
+                {% csrf_token %}
+                <div class="textbox">
+                    <label for="documento">Código de estudiante:</label>
+                    <input type="text" name="documento" id="documento" required>
+                </div>
+                <div class="textbox">
+                    <label for="password">Contraseña:</label>
+                    <input type="password" name="password" id="password" required>
+                </div>
+                <button type="submit" class="btn">Iniciar sesión</button>
+            </form>            
+            <a href="{% url 'index_two' %}" class="nice-button">Volver</a>
+        </div>
+    </div>
+</body>
+{% endblock %}

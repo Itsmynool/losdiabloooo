@@ -1,0 +1,31 @@
+{% extends 'startbootstrap-sb-admin-2-gh-pages/buttons.html' %}
+
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PUNTUACION</title>
+</head>
+<body>
+    {% block contenido %}
+    <center>
+        <div style="padding: 50px;">
+            <h1>Tu púntuacion es {{pointt}}</h1>
+            {% if pointt >= 5 %}
+            <p>¡Buen trabajo!</p>
+            {% else %}
+            <p>Sigue trabajando</p>
+            {%endif%}
+        </div>
+
+        <form method="get" action="{% url 'index' %}">
+            <button class="btn btn-secondary">VOLVER</button>
+        </form>
+        
+    </center>
+    {% endblock %}
+</body>
+</html>
+

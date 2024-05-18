@@ -1,0 +1,63 @@
+{% extends 'startbootstrap-sb-admin-2-gh-pages/buttons.html' %} {% load static %} {% block contenido %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Preguntas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        .carousel-item {
+            max-width: 800px;
+            max-height: 800px;
+            margin: 0 auto;
+        }
+        .form-check-label {
+            font-family: 'Lato', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-4" style="width: 800px; height: 800px;">
+        <center>
+            {% if preguntas %}
+            <form action="{% url 'procesar_respuestas_preguntas' %}" method="post">
+                {% csrf_token %}
+                <div id="carouselExampleIndicators" class="carousel slide" style="background: linear-gradient(to bottom right, #a45fff, #f8cfff, #a45fff); border: none; border-radius: 20px; box-shadow: 0px 0px 20px rgba(0,0,0,0.75);">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <p style="color: rgb(0, 0, 0); margin-top: 20px; font-size: 24px; font-family: 'Montserrat', sans-serif; font-weight: bold;">{{ preguntas.enunciado }}</p>
+                            {% for opcion in preguntas.opciones %}
+                            <div class="form-check">
+                                <input class="form-check-input" type="submit" name="respuesta{{ preguntas.id }}" id="flexRadioDefault{{ forloop.counter }}" value="{{ opcion }}" style="padding: 10px;">
+                                <label class="form-check-label" for="flexRadioDefault{{ forloop.counter }}" style="font-size: 18px; margin-left: 10px;">{{ opcion }}</label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </form>
+            {% else %}
+            <div id="carouselExampleIndicators" class="carousel slide" style="background: linear-gradient(to bottom right, #a45fff, #f8cfff, #a45fff); border: none; border-radius: 20px; box-shadow: 0px 0px 20px rgba(0,0,0,0.75);">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <p style="color: rgb(0, 0, 0); margin-top: 20px; font-size: 24px; font-family: 'Montserrat', sans-serif; font-weight: bold;">Tu puntaje final es: <span id="puntaje">{{ puntaje }}/{{ total_preguntas }}</span></p>
+                        <form action="{% url 'juego_pregunta' %}" method="get">
+                            <div class="form-check" style="margin-top: 100px;">
+                                <input type="submit" name="reiniciar" value="Intentar de nuevo" class="btn btn-primary">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </center>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+</body>
+</html>
+{% endblock %}

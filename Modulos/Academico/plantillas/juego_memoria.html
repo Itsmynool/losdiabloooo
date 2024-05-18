@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Juego de Memoria</title>
-    <style>
+<style>
         .memory-game {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -26,7 +26,7 @@
         .memory-card-inner {
             width: 100%;
             height: 100%;
-            transition: transform 0.6s;
+            transition: transform 0.5s;
             transform-style: preserve-3d;
             position: relative;
         }
@@ -56,32 +56,82 @@
             <div class="memory-card" data-name="{{ name }}" data-descubierta="{{ descubierta }}">
                 <div class="memory-card-inner">
                     <img src="{{ image }}" alt="Imagen de {{ name }}" class="memory-card-front">
-                    <img src="{% static 'img/negro.jpg' %}" alt="Reverso" class="memory-card-back hidden">
+                    <img src="{% static 'img/negro.jpg' %}" alt="Reverso" class="memory-card-back">
                 </div>
             </div>
             {% endfor %}
         {% endfor %}
     </div>
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const cards = document.querySelectorAll('.memory-card');
-
-            // Mostrar las imágenes originales durante 3 segundos y luego taparlas
+            let hasFlippedCard = false;
+            let lockBoard = false;
+            let firstCard, secondCard;
+    
+            function flipCard() {
+                if (lockBoard) return;
+                if (this === firstCard) return;
+    
+                this.classList.add('flip');
+    
+                if (!hasFlippedCard) {
+                    hasFlippedCard = true;
+                    firstCard = this;
+                    return;
+                }
+    
+                secondCard = this;
+                checkForMatch();
+            }
+    
+            function checkForMatch() {
+                if (firstCard.dataset.name === secondCard.dataset.name) {
+                    disableCards();
+                } else {
+                    lockBoard = true; // Bloquea el tablero para evitar que se vuelvan a voltear las cartas
+                    setTimeout(() => {
+                        unflipCards();
+                    }, 1500);
+                }
+            }
+    
+            function disableCards() {
+                firstCard.dataset.descubierta = 'true';
+                secondCard.dataset.descubierta = 'true';
+                resetBoard();
+            }
+    
+            function unflipCards() {
+                firstCard.classList.remove('flip');
+                secondCard.classList.remove('flip');
+                resetBoard();
+            }
+    
+            function resetBoard() {
+                [hasFlippedCard, lockBoard] = [false, false];
+                [firstCard, secondCard] = [null, null];
+            }
+    
+            cards.forEach(card => card.addEventListener('click', flipCard));
+    
+            // Tapar las imágenes nuevamente después de 3 segundos
             setTimeout(() => {
                 cards.forEach(card => {
-                    card.classList.add('flip');
-                    const frontImage = card.querySelector('.memory-card-front');
-                    const backImage = card.querySelector('.memory-card-back');
-                    setTimeout(() => {
-                        frontImage.classList.add('hidden');
-                        backImage.classList.remove('hidden');
-                    }, 300);
+                    if (card.dataset.descubierta === 'false') {
+                        card.classList.remove('flip');
+                    }
                 });
-            }, 3000); // 3 segundos para mostrar las imágenes originales
+            }, 3000);
         });
     </script>
+     
+    
+
 </body>
 </html>
+
 
 
 {% endblock %}

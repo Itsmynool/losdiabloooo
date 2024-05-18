@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Docente, Estudiante, Curso, Calificacion, Preguntas, Card, Adivinanzas, Puntuacion
+from .models import Docente, Estudiante, Curso, Calificacion, Preguntas, Card, Adivinanzas, Puntuacion, Memoria
 
 # Register your models here.
 
@@ -11,3 +11,4 @@ admin.site.register(Preguntas)
 admin.site.register(Card)
 admin.site.register(Adivinanzas)
 admin.site.register(Puntuacion)
+admin.site.register(Memoria)

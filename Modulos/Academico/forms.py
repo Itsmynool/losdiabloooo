@@ -1,5 +1,5 @@
 from django import forms
-from .models import Curso, Docente, Estudiante, Calificacion, Preguntas, Adivinanzas
+from .models import Curso, Docente, Estudiante, Calificacion, Preguntas, Adivinanzas, Memoria
 
 class LoginForm(forms.Form):
     correo = forms.EmailField(label='Correo electrónico', max_length=100)
@@ -43,4 +43,10 @@ class AdivinanzasForm(forms.ModelForm):
 
 	class Meta:
 		model = Adivinanzas
+		fields = '__all__'
+
+class MemoriaForm(forms.ModelForm):
+
+	class Meta:
+		model = Memoria
 		fields = '__all__'

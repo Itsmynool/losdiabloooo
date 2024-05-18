@@ -12,9 +12,9 @@ from .models import Curso
 from .models import Calificacion
 from .models import Preguntas
 from .models import Adivinanzas, Puntuacion
-from .forms import EstudiantesForm
+from .forms import EstudiantesForm, MemoriaForm
 from .forms import CursoForm
-from .forms import DocenteForm
+from .forms import DocenteForm, Memoria
 from .forms import CalificacionesForm, AdivinanzasForm
 from .forms import LoginForm
 from .forms import PreguntasForm
@@ -614,4 +614,33 @@ def puntuaciones(request):
                        puntuaciones.filter(tipo_de_juego__icontains=query)
         
     return render(request, "listaPuntuaciones.html", {"Puntuaciones": puntuaciones})
+
+def listaMemoria(request):
+    memoriaDatos=Memoria.objects.all()
+    return render(request, "listaMemoria.html",{"Memoria":memoriaDatos})
+
+def modificar_memorias(request, memoria_id):
+	memoria=get_object_or_404(Adivinanzas, id=memoria_id)#busca un elemento
+	data={
+		'form':MemoriaForm(instance=memoria)
+	}
+
+	if request.method=='POST':
+		formulario=MemoriaForm(data=request.POST, instance=memoria, files=request.FILES)
+		if formulario.is_valid():
+			formulario.save()
+			messages.success(request, "Modificado Correctamente")
+			data["mensaje"]="Archivo Modificado"
+			return redirect(to='../lmemorias')
+		else:
+			data["form"]=formulario
+			data["mensaje"]="El archivo no existe"
+			return redirect(to='ListaMemoriaW')
+	return render(request, 'modificarMemoria.html', data)
+
+def eliminar_memorias(request, memoria_id):
+    memoria = get_object_or_404(Preguntas, id=memoria_id)
+    memoria.delete()
+    messages.success(request, "Memoria eliminada correctamente")
+    return redirect(to='ListaMemoria')
 

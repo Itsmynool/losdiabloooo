@@ -127,7 +127,14 @@ class Puntuacion(models.Model):
 
     def __str__(self):
         return f"Puntuación de {self.estudiante}: {self.puntuacion} ({self.get_tipo_de_juego_display()})"
+    
+class Memoria(models.Model):
+    nombre = models.CharField(max_length=255, unique=True)
+    enlace_1 = models.URLField(max_length=200)
+    enlace_2 = models.URLField(max_length=200)
 
+    def __str__(self):
+        return self.nombre
 
 
 class Card(models.Model):

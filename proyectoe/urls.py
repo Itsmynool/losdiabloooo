@@ -2,9 +2,9 @@ from django.contrib import admin
 from django.urls import path
 from Modulos.Academico.views import agregar_curso, agregar_docente, agregar_pregunta, calificaciones, index, index_two, juegosplan, login_view, login_viewEstudiante
 from Modulos.Academico.views import Listaestudiante, buscarestudiante, agregar_estudiantes, modificar_estudiante, eliminar_estudiante, juegoU, juegoD, juegoAdivinanza, procesar_respuestas
-from Modulos.Academico.views import modificar_curso, eliminar_curso, Listacurso, eliminar_preguntas, Listaadivinanzas
+from Modulos.Academico.views import modificar_curso, eliminar_curso, Listacurso, eliminar_preguntas, Listaadivinanzas, listaMemoria, eliminar_memorias
 from Modulos.Academico.views import modificar_docente, eliminar_docente, Listadocente, logout_view, modificar_preguntas, eliminar_adivinanzas
-from Modulos.Academico.views import modificar_calificaciones, eliminar_calificaciones, Listacalificaciones, buscarCalificacion
+from Modulos.Academico.views import modificar_calificaciones, eliminar_calificaciones, Listacalificaciones, buscarCalificacion, modificar_memorias
 from Modulos.Academico.views import Listapreguntas, puntuaciones, juegoPregunta, procesar_respuestas_preguntas, agregar_adivinanza, modificar_adivinanzas
 
 
@@ -54,6 +54,11 @@ urlpatterns = [
     path('ladivinanza/', Listaadivinanzas, name='Listaadivinanzas'),
     path('eliminar_adivinanzas/<int:adivinanza_id>/', eliminar_adivinanzas, name="eliminar_adivinanzas"),
     path('modificar_adivinanzas/<int:adivinanza_id>', modificar_adivinanzas, name="modificar_adivinanzas"),
+
+    # Memoria
+    path('lmemoria/', listaMemoria, name='ListaMemoria'),
+    path('modificar_memoria/<int:memoria_id>', modificar_memorias, name="modificar_memorias"),
+    path('eliminar_memoria/<int:memoria_id>', eliminar_memorias, name="eliminar_memorias"),
 
     # Index
     path('index/', index, name='index'),
